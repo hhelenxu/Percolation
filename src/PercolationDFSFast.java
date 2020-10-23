@@ -6,10 +6,10 @@ public class PercolationDFSFast extends PercolationDFS {
     @Override
     public void updateOnOpen(int row, int col) {
         boolean neighbor = false;
-        if (row > 0 && myGrid[row-1][col]==IPercolate.FULL) neighbor = true;
-        if (row < myGrid.length-1 && myGrid[row+1][col]==IPercolate.FULL) neighbor = true;
-        if (col > 0 && myGrid[row][col-1]==IPercolate.FULL) neighbor = true;
-        if (col < myGrid[row].length-1 && myGrid[row][col+1]==IPercolate.FULL) neighbor = true;
+        if (inBounds(row-1,col) && isFull(row-1,col)) neighbor = true;
+        if (inBounds(row+1,col) && isFull(row+1,col)) neighbor = true;
+        if (inBounds(row,col-1) && isFull(row,col-1)) neighbor = true;
+        if (inBounds(row,col+1) && isFull(row,col+1)) neighbor = true;
         if (row==0 || neighbor)
             dfs(row,col);
     }
