@@ -30,7 +30,7 @@ public class PercolationDFS implements IPercolate {
 		myGrid = new int[n][n];
 		myOpenCount = 0;
 		for (int[] row : myGrid)
-			Arrays.fill(row, BLOCKED);
+			Arrays.fill(row, IPercolate.BLOCKED);
 	}
 
 	public void open(int row, int col) {
@@ -39,10 +39,10 @@ public class PercolationDFS implements IPercolate {
 			throw new IndexOutOfBoundsException(
 					String.format("(%d,%d) not in bounds", row,col));
 		}
-		if (myGrid[row][col] != BLOCKED)
+		if (myGrid[row][col] != IPercolate.BLOCKED)
 			return;
 		myOpenCount += 1;
-		myGrid[row][col] = OPEN;
+		myGrid[row][col] = IPercolate.OPEN;
 		updateOnOpen(row,col);
 	}
 
@@ -52,7 +52,7 @@ public class PercolationDFS implements IPercolate {
 			throw new IndexOutOfBoundsException(
 					String.format("(%d,%d) not in bounds", row,col));
 		}
-		return myGrid[row][col] != BLOCKED;
+		return myGrid[row][col] != IPercolate.BLOCKED;
 	}
 
 	public boolean isFull(int row, int col) {
@@ -62,14 +62,14 @@ public class PercolationDFS implements IPercolate {
 					String.format("(%d,%d) not in bounds", row,col));
 		}
 		
-		return myGrid[row][col] == FULL;
+		return myGrid[row][col] == IPercolate.FULL;
 	}
 
 	private void clearFull() {
 		for (int i = 0; i < myGrid.length; i++) {
 			for (int j = 0; j < myGrid[0].length; j++) {
-				if (myGrid[i][j] == FULL) {
-					myGrid[i][j] = OPEN;
+				if (myGrid[i][j] == IPercolate.FULL) {
+					myGrid[i][j] = IPercolate.OPEN;
 				}
 			}
 		}
@@ -105,7 +105,7 @@ public class PercolationDFS implements IPercolate {
 		if (isFull(row, col) || !isOpen(row, col))
 			return;
 		
-		myGrid[row][col] = FULL;
+		myGrid[row][col] = IPercolate.FULL;
 		dfs(row - 1, col);
 		dfs(row, col - 1);
 		dfs(row, col + 1);
